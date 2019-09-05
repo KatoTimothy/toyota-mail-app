@@ -1,0 +1,145 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>Toyota Mailing Order App</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0">
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<!--	<link rel="stylesheet" href="css/bootstrap.css">-->
+</head>
+
+<body>
+	<div class="container clearfix">
+		<h2 style="text-align: center">TOYOTA MAIL ORDER APP</h2>
+		<form action="#" method="post" id="toyota-mail">
+			<div class="form-container">
+				<!--customer Information-->
+				<fieldset id="customer-info" class="form-group">
+					<legend>Customer Information</legend>
+					<div class="form-group">
+						<label for="customer-id" class="form-label">CustomerID:</label>
+						<input type="text" name="customer_id" id="customer-id" class="form-control"><span class="msg"><small id="id-msg"></small></span>
+					</div>
+
+					<div class="form-group">
+						<label for="user-name" class="form-label">Name:</label>
+						<input type="text" name="user_name" id="user-name" class="form-control"><span><small></small></span>
+					</div>
+
+					<div class="form-group">
+						<label for="city" class="form-label">City:</label>
+						<div class="form-inline">
+
+							<select id="city" class="form-control" name="city">
+								<option value="KLA" selected id="kampala">Kampala</option>
+								<option value="EBB" id="entebbe">Entebbe</option>
+								<option value="MBR" id="mbarara">Mbarara</option>
+								<option value="OTH" id="other">Other</option>
+							</select>
+
+							<input type="checkbox" name="retail" id="retail" checked class="mx">
+							<label for="retail"><small>Retail Customer</small></label>
+
+						</div>
+					</div> <!-- form-group out-->
+				</fieldset>
+
+
+				<!--		Shipping-->
+
+				<fieldset class="form-group" id="shipping">
+					<legend>Shipping</legend>
+
+					<div class="form-group">
+						<input type="radio" name="ship_method" id="ups" value="ups" checked>&nbsp;
+						<label for="ups" class="">UPS</label>
+
+
+						<input type="radio" name="ship_method" id="fed" value="fed_ex_ground">
+						<label for="fed" class="">Fed Ex Ground</label>
+
+					</div>
+					<div class=" form-group">
+						<input type="radio" name="ship_method" id="upsa" value="us_post_air">
+						<label for="upsa" class="">US Postal Air</label>
+
+						<input type="radio" name="ship_method" id="fea" value="fed_ex_air">
+						<label for="fea" class="">Fed Ex Air</label>
+					</div>
+				</fieldset>
+
+
+				<!--		Part Ordered-->
+				<fieldset class="form-group" id="part-ordered">
+					<legend>Part Ordered</legend>
+					<div class="form-group">
+						<label for="part_num" class="form-label">Part Number:</label>
+						<input type="text" name="part_num" id="part_num" class="form-control"><span><small></small></span>
+					</div>
+
+					<div class="form-group">
+						<label for="description" class="form-label">Description: </label>
+						<input type="text" name="description" id="description" class="form-control"><span><small></small></span>
+					</div>
+
+					<div class="form-group">
+						<label for="unit-price" class="form-label">Price per part: </label>
+
+						<div class="form-inline">
+							<input type="text" name="unit_price" id="unit-price" class="" value="7.51"><span><small></small></span>
+
+
+							<label for="quantity" class="mx"><small>Quantity:</small></label>
+							<input type="text" name="quantity" id="quantity" class="form-control" value="2"><span><small></small></span>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="oversize_" class="form-label"></label>
+						<div class="form-inline" style="font-size: .9em;">
+							<input type="checkbox" name="oversize" id="oversize" value="not_oversize">
+							<label for="oversize">Oversize Container?</label>
+						</div>
+					</div>
+				</fieldset>
+
+				<!--			Output-->
+				<fieldset class="form-group" id="output">
+					<legend>Output</legend>
+					<div class="form-group">
+						<label class="form-label">Cost: </label>
+						<div class="computations" id="cost"></div>
+					</div>
+
+					<div class="form-group">
+						<label class="form-label">Sales Tax: </label>
+						<div class="computations" id="sales-tax"></div>
+					</div>
+
+					<div class="form-group">
+						<label class="form-label">Shipping &amp; Handling: </label>
+						<div class="computations" id="ship-bill"></div>
+					</div>
+
+					<div class="form-group">
+						<label class="form-label">Total: </label>
+						<div class="computations" id="total"></div>
+					</div>
+				</fieldset>
+			</div>
+			<!--form container-->
+		</form>
+		<footer class="row">
+			<button id="compute" class="btn col1">Compute</button>
+			<button id="new-order" class="btn col2">New Order</button>
+			<button id="exit" class="btn col12">Exit</button>
+
+		</footer>
+	</div>
+	<!--container-->
+	<script src="js/scripts.js"></script>
+
+</body></html>
