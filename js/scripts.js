@@ -22,10 +22,7 @@ computeButton.addEventListener('click', (event) => {
 			unitPriceEl = document.querySelector("unit-price");
 		//validate customer id 
 		//validate customer id
-		function validId() {
-			let allDigits = /^(\d+)$/;
 
-		}
 		validId();
 	} //validate
 
