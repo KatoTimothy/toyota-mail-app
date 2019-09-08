@@ -1,0 +1,193 @@
+body {
+	background: #f8f8fa;
+	font-family: "acumin pro";
+	height: 90vh;
+}
+
+/*uiversal box model fix*/
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+/*clear fix*/
+
+.clearfix:after {
+	content: ".";
+	visibility: hidden;
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.container {
+	background: #e5e6eb;
+	border-radius: 10px;
+	margin: 20px auto;
+	padding: 10px 20px;
+	width: 80%;
+}
+
+/*layout styles*/
+
+
+/*
+	GRID STYLES
+*/
+
+/*Form layout styles*/
+.form-container {
+	display: grid;
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+	grid-template-columns: repeat (2, 1fr);
+	grid-template-rows: repeat(2, auto);
+	margin: auto;
+
+}
+
+#customer-info {
+
+	grid-column: 1;
+	grid-row: 1;
+}
+
+#shipping {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+#output {
+
+	grid-column: 2;
+	grid-row: 2;
+
+}
+
+#part-ordered {
+
+	grid-column: 1;
+	grid-row: 2;
+}
+
+.form-group {
+	margin-bottom: 8px;
+}
+
+.form-label {
+	display: inline-block;
+	width: 10em;
+	font-size: 1em;
+}
+
+/*footer layout styles*/
+.row {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto;
+	grid-column-gap: 20px;
+}
+
+.col1 {
+	grid-column: 1;
+}
+
+.col2 {
+	grid-column: 2;
+
+}
+
+
+.col12 {
+	grid-column: 12;
+}
+
+/*Form input styles*/
+input[type="text"],
+input[type="email"],
+input[type="number"],
+.computations {
+	padding: 4px 5px;
+	outline: none;
+	border: 1px solid darkgray;
+	border-radius: 3px;
+	width: 260px;
+	display: inline-block;
+	height: 25px;
+}
+
+#unit-price,
+#quantity {
+	text-align: right;
+}
+
+/*change width of customer id field*/
+#customer-id {
+	width: 120px;
+}
+
+select {
+	width: 100px;
+	padding: 4px 5px;
+	outline: none;
+	border: 1px solid darkgray;
+	border-radius: 3px;
+}
+
+fieldset {
+	border: solid 1px gray;
+	background: #eeeeee;
+}
+
+legend {
+	font-weight: 550;
+}
+
+.city-retail {
+	display: inline-block;
+	width: 150px;
+	margin-left: 2em;
+}
+
+.form-inline {
+	display: inline-block;
+}
+
+/*set horizontal space outside element*/
+.mx {
+	margin-left: 15px;
+}
+
+#unit-price {
+	width: 100px;
+}
+
+#quantity {
+	width: 75px;
+}
+
+/*on focus  styles*/
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus {
+	outline: solid 1px gray;
+	border-radius: 3px;
+}
+
+.btn {
+	padding: 5px 2px;
+	background: lightgray;
+	border: solid 1px gray;
+	border-radius: 3px;
+	width: 100px;
+}
+
+.computations {
+	background: white;
+	text-align: right;
+	font-size: .9em;
+	width: 150px;
+	margin: 0;
+}
