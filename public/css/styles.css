@@ -163,7 +163,7 @@ legend {
 	width: 100px;
 }
 
-#quantity {
+#qty {
 	width: 75px;
 }
 
@@ -190,4 +190,15 @@ select:focus {
 	font-size: .9em;
 	width: 150px;
 	margin: 0;
+}
+
+.msg {
+	color: red;
+	margin-left: 12em;
+	margin-top: .5em;
+	font-size: .85em;
+}
+
+input[type="text"]:focus {
+	outline: none;
 }

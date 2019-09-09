@@ -22,7 +22,7 @@ app.use(express.static('./public'));
 
 //creating the database connection
 const connection = mysql.createConnection({
-    host: '127.0.0.1',
+    host: 'localhost',
     user: 'root',
     database: 'toyota_db'
 });
@@ -34,12 +34,12 @@ app.get("/", function (req, res) {
 });
 
 //the route for accessing the database
-app.post("/form", (req, res) => {
+app.post("/purchases", (req, res) => {
     const reqBody = req.body;
     //object created to pick the inputs from the form body
     let obj = {
         customer_id: reqBody.customer_id,
-        name: reqBody.user_name,
+        user_name: reqBody.user_name,
         city: reqBody.city,
         part_num: reqBody.part_num,
         unit_price: reqBody.unit_price,
@@ -49,20 +49,21 @@ app.post("/form", (req, res) => {
         retail: reqBody.retail,
         total: reqBody.total
     };
-
-    //assigning variables to get the inputs from the form
+    console.log(obj.customer_id, obj.city);
+    //assigning variables to get the inputs from to he form
     let city = obj.city,
         unit_price = obj.unit_price,
         quantity = obj.quantity,
         retailer = obj.retail,
         ship_method = obj.shipping_method,
-        customerId = obj.customer_id;
+        customerId = obj.customer_id,
+        user_name = obj.user_name;
 
     console.log(customerId, city, unit_price, quantity, retailer, ship_method);
 
     //query for inserting into the database
     const querystring =
-        "INSERT INTO customer_info VALUES(?,?,?,?)";
+        "INSERT INTO customer_info(customer_id, user_name, city, retail) VALUES(?,?,?,?)";
     //using the sql connection to apply the querystring and pass them to the variables
     connection.query(querystring, [
         customerId,
@@ -72,13 +73,11 @@ app.post("/form", (req, res) => {
     ]);
 
     setTimeout(function () {
-        res.redirect('/')
+        res.redirect('/');
         res.end();
-    }, 1000)
-
-
+    }, 5000);
 });
 //notifying the console that the server will listen at port 3000
 
-app.listen(3000);
-console.log('Server is listening from port 3000');
+app.listen(4000);
+console.log('Server is listening from port 4000');

@@ -13,7 +13,7 @@
 	<body>
 		<div class="container clearfix">
 			<h2 style="text-align: center">TOYOTA MAIL ORDER APP</h2>
-			<form action="form" method="get" id="toyota-mail">
+			<form action="purchases" method="post" id="toyota-mail" onsubmit="return validData();">
 				<div class="form-container">
 					<!--customer Information-->
 					<fieldset id="customer-info" class="form-group">
@@ -21,13 +21,14 @@
 						<div class="form-group">
 							<label for="customer-id" class="form-label">CustomerID:</label>
 							<input type="text" name="customer_id" id="customer-id" class="form-control"
-								placeholder="123-46-6789"><span class="msg"><small id="id-msg"></small></span>
+								placeholder="123-46-6789">
+							<div class="msg" id="id-msg"></div>
 						</div>
 
 						<div class="form-group">
 							<label for="user-name" class="form-label">Name:</label>
-							<input type="text" name="user_name" id="user-name"
-								class="form-control"><span><small></small></span>
+							<input type="text" name="user_name" id="user-name" class="form-control">
+							<span class="msg" id="name-id"><small></small></span>
 						</div>
 
 						<div class="form-group">
@@ -41,7 +42,7 @@
 									<option value="OTH" id="other">Other</option>
 								</select>
 
-								<input type="checkbox" name="retail" id="retail" checked class="mx">
+								<input type="checkbox" name="retail" id="retail" checked class="mx" value="retailer">
 								<label for="retail"><small>Retail Customer</small></label>
 
 							</div>
@@ -78,29 +79,28 @@
 						<legend>Part Ordered</legend>
 						<div class="form-group">
 							<label for="part_num" class="form-label">Part Number:</label>
-							<input type="text" name="part_num" id="part_num"
-								class="form-control"><span><small></small></span>
+							<input type="text" name="part_num" id="part_num" class="form-control">
+							<span><small></small></span>
 						</div>
 
 						<div class="form-group">
 							<label for="description" class="form-label">Description: </label>
-							<input type="text" name="description" id="description"
-								class="form-control"><span><small></small></span>
+							<input type="text" name="description" id="description" class="form-control">
+							<span></span>
 						</div>
 
 						<div class="form-group">
 							<label for="unit-price" class="form-label">Price per part: </label>
 
 							<div class="form-inline">
-								<input type="text" name="unit_price" id="unit-price" class=""
-									placeholder="7.51"><span><small></small></span>
+								<input type="text" name="unit_price" id="unit-price" class="" placeholder="7.51">
 
 
-								<label for="quantity" class="mx"><small>Quantity:</small></label>
-								<input type="text" name="quantity" id="quantity" class="form-control"
-									placeholder="2"><span><small></small></span>
+								<label for="qty" class="mx"><small>Quantity:</small></label>
+								<input type="text" name="quantity" id="qty" class="form-control" placeholder="2">
 
 							</div>
+							<div class="msg" id="price-msg"></div>
 						</div>
 
 						<div class="form-group">
@@ -137,13 +137,12 @@
 					</fieldset>
 				</div>
 				<!--form container-->
+				<footer class="row">
+					<input type="submit" class="btn col1" id="compute" value="Compute">
+					<button id="new-order" class="btn col2" type="reset">New Order</button>
+					<button id="exit" class="btn col12" type="button">Exit</button>
+				</footer>
 			</form>
-			<footer class="row">
-				<input type="submit" id="compute" class="btn col1" value="Compute">
-				<button id="new-order" class="btn col2" type="button">New Order</button>
-				<button id="exit" class="btn col12" type="button">Exit</button>
-
-			</footer>
 		</div>
 		<!--container-->
 		<script src="js/scripts.js"></script>
