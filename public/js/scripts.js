@@ -2,30 +2,126 @@
 window.onload = function () {
 	document.querySelector('#customer-id').focus();
 }
+var cost, total, quantity, salesTax = 0;
+var formEl = document.getElementById("toyota-mail");
 
+formEl.onsubmit = validData;
+
+// validates form
+function validData() {
+	//get quantity
+	quantity = parseFloat(document.getElementById('qty').value);
+
+	//get customer id
+	const customerIdEl = document.querySelector('#customer-id'),
+		userNameEl = document.querySelector('#user-name'),
+		//get user name
+		partNumberEl = document.querySelector('#part_num'),
+		//get description input element
+		descriptionEl = document.querySelector('#description'),
+		//get unit price input element
+		unitPriceEl = document.querySelector("#unit-price"),
+		//get quantity input element
+		quantityEl = document.querySelector("#qty"),
+		// get element that displays errors
+		errorMsgEl = document.getElementsByClassName("msg");
+
+	//give  all error message elements all empty html text
+	for (var i = 0; i < errorMsgEl.length; i++) {
+		errorMsgEl[i].innerHTML = "";
+	}
+
+	//reset styles from all elements in the form 
+	for (var i = 0; i < formEl.elements.length; i++) {
+		formEl.elements[i].style = "";
+	}
+	//validate customer id 
+	let idPattern = /^\d{1,9}$/,
+		validId = (idPattern.test(customerIdEl.value)) && (customerIdEl.value !== "");
+	document.querySelector("#id-msg").innerHTML = "";
+
+	// validate cutomer id input 
+	if (!validId) {
+		customerIdEl.style = "border-color:red;";
+		customerIdEl.focus();
+		document.querySelector("#id-msg").innerHTML = "Required and Enter only numbers.";
+		return false;
+	}
+
+	//validate name input
+	let validName = userNameEl.value.length !== 0;
+
+	if (!validName) {
+		userNameEl.style = "border-color:red";
+		userNameEl.focus();
+		document.querySelector("#name-msg").innerHTML = "Required field";
+		return false;
+	}
+
+	//validate part number input 
+	let partPattern = /^\d+$/,
+		validPart = partPattern.test(partNumberEl.value) && partNumberEl.value !== "";
+	if (!validPart) {
+		partNumberEl.style = "border-color:red";
+		partNumberEl.focus();
+		document.querySelector("#part-msg").innerHTML = "Required field";
+		return false;
+	}
+
+	//validate description input
+	let validDescribe = descriptionEl.value !== "";
+	if (!validDescribe) {
+		descriptionEl.style = "border-color:red";
+		descriptionEl.focus();
+		document.querySelector("#describe-msg").innerHTML = "Required field";
+		return false;
+	}
+	//validate unit price input
+	var pricePattern = /^-?\d*(\.\d+)?$/,
+		validPrice = (pricePattern.test(unitPriceEl.value)) && (unitPriceEl.value !== "");
+	document.querySelector("#price-msg").innerHTML = "";
+	if (!validPrice) {
+		unitPriceEl.style = "border-color:red";
+		unitPriceEl.focus();
+		document.querySelector("#price-msg").innerHTML = "quantity Can't be missing";
+		return false;
+	}
+
+	//validate quantity input 
+	let qtyPattern = /^\d+$/,
+		validQty = (qtyPattern.test(quantityEl.value)) && (quantityEl.value.length !== 0);
+	if (!validQty) {
+		quantityEl.style = "border-color:red";
+		quantityEl.focus();
+		document.querySelector("#price-msg").innerHTML = "price is required";
+		return false;
+	}
+
+	computeCost();
+	computeSalesTax();
+	shippingHandling();
+	computeTotal();
+} //end validate
 
 //computes the cost and displays it in browser
 var computeCost = function () {
 	//get unit price
-	var unitPrice = parseFloat(document.getElementById("unit-price").value),
+	var unitPrice = document.getElementById("unit-price").value,
 		//get cost element
 		costEl = document.getElementById('cost');
-	//if no values provided for the unit price and quantity set them to 0
-	if (unitPrice === undefined || unitPrice === null || isNaN(unitPrice)) unitPrice = 0;
-	if (quantity === undefined || quantity === null || isNaN(quantity)) quantity = 0;
-	//compute cost
+	//compute cost	
 	cost = unitPrice * quantity;
 	//display cost in browser
 	costEl.innerHTML = ` $ ${cost.toFixed(2)}`;
 	// event.preventDefault();
-	return parseFloat(cost);
+	return cost;
 
-} //compute cost
+} //compute cost	
 
 
 //computes the sales tax based on town selected
 var computeSalesTax = function () {
-	let taxRate, townCode, retailCustomer, salesTaxEl = document.getElementById("sales-tax");
+	let retailCustomer, salesTaxEl = document.getElementById("sales-tax");
 
 	// check if checkbox is checked
 	retailCustomer = document.getElementById('retail').checked;
@@ -48,7 +144,7 @@ var computeSalesTax = function () {
 				salesTax = (cost * 10 / 100).toFixed(2);
 				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return parseFloat(salesTax);
+				return salesTax;
 				break;
 			}
 			// if entebbe or mbarara are selected
@@ -57,17 +153,17 @@ var computeSalesTax = function () {
 				salesTax = (cost * 5 / 100).toFixed(2);
 				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return parseFloat(salesTax);
+				return salesTax;
 				break;
 			}
 			case 'OTH':
 				salesTax = 0;
 				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return parseFloat(salesTax);
-		} // end switch
-	} //end else
-} //end compute sales tax
+				return salesTax;
+		} // end switch		
+	} //end else	
+} //end compute sales tax	
 
 
 //computes shipping and handling fees
@@ -82,7 +178,7 @@ function shippingHandling() {
 		//store the shipping and handling cost
 		shipAndHandle;
 
-	//check if oversize checkbox is checked 
+	//check if oversize checkbox is checked 	
 	var containerOverSize = document.getElementById('oversize').checked;
 	//loop throught the shippingMethods array
 	for (var i = 0; i < shippingMethods.length; i++) {
@@ -97,7 +193,7 @@ function shippingHandling() {
 				case 'ups': {
 					shipping = 7;
 					break;
-				} //case
+				} //case	
 
 				case 'fed_ex_ground': {
 					shipping = 9.25;
@@ -112,7 +208,7 @@ function shippingHandling() {
 					shipping = 12.00;
 					break;
 				}
-			} //switch end
+			} //switch end	
 			if (!containerOverSize) {
 				shipAndHandle = quantity * shipping;
 				shipAndHandleEl.innerHTML = `$ ${shipAndHandle.toFixed(2)}`;
@@ -126,73 +222,12 @@ function shippingHandling() {
 				shipAndHandleEl.innerHTML = `$ ${shipAndHandle.toFixed(2)}`;
 				//						console.log(shipAndHandle);
 				// event.preventDefault();
-				return parseFlost(shipAndHandle.toFixed(2));
-			} //else end 
-		} //if end 
-	} //forloop
-} // compute ship handling fees
+				return shipAndHandle.toFixed(2);
+			} //else end 	
+		} //if end 	
+	} //forloop	
+} // compute ship handling fees	
 
-
-var cost, total, quantity, salesTax = 0;
-var formEl = document.getElementById("toyota-mail");
-// validates form
-function validData() {
-	//form element
-
-	quantity = parseFloat(document.getElementById('qty').value);
-	//get customer id
-	//get user
-	const customerIdEl = document.querySelector('#customer-id'),
-		userNameEl = document.querySelector('#user-name'),
-		//get user name
-		partNumberEl = document.querySelector('#part_num'),
-		//get description 
-		descriptionEl = document.querySelector('#description'),
-		//get unit price
-		unitPriceEl = document.querySelector("#unit-price"),
-		quantityEl = document.querySelector("#qty");
-
-	// function validateId() {
-	//validate customer id 
-	let idPattern = /^\d{1,9}$/,
-		validId = (idPattern.test(customerIdEl.value)) && (customerIdEl.value !== "");
-	document.querySelector("#id-msg").innerHTML = "";
-
-	if (!validId) {
-		customerIdEl.style = "border-color:red;";
-		customerIdEl.focus();
-		document.querySelector("#id-msg").innerHTML = "Required and Enter only numbers.";
-		return false;
-	}
-	customerIdEl.style = "";
-
-	//validate price
-	let validPrice = (!isNaN(unitPriceEl.value)) && (unitPriceEl.value !== "");
-	document.querySelector("#price-msg").innerHTML = "";
-	if (!validPrice) {
-		unitPriceEl.style = "border-color:red";
-		unitPriceEl.focus();
-		document.querySelector("#price-msg").innerHTML = "Price and quantity Can't be missing";
-		return false;
-	}
-	unitPriceEl.style = "";
-
-	//validate quantity
-	let qtyPattern = /^\d+$/,
-		validQty = (qtyPattern.test(quantityEl.value)) && (quantityEl.value.length !== 0);
-	if (!validQty) {
-		quantityEl.style = "border-color:red";
-		quantityEl.focus();
-		return false;
-	}
-	quantityEl.style = "";
-	// return (true);
-
-	computeCost();
-	computeSalesTax();
-	computeTotal();
-	shippingHandling()
-} //end validate
 
 
 //computes total

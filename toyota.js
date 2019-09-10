@@ -36,7 +36,7 @@ app.get("/", function (req, res) {
 //the route for accessing the database
 app.post("/purchases", (req, res) => {
     const reqBody = req.body;
-    //object created to pick the inputs from the form body
+    //object to store values in the req.body
     let obj = {
         customer_id: reqBody.customer_id,
         user_name: reqBody.user_name,
@@ -47,37 +47,45 @@ app.post("/purchases", (req, res) => {
         shipping_method: reqBody.ship_method,
         oversize: reqBody.oversize,
         retail: reqBody.retail,
-        total: reqBody.total
+        description: reqBody.description
     };
     console.log(obj.customer_id, obj.city);
-    //assigning variables to get the inputs from to he form
-    let city = obj.city,
+    //assigning variables to get the inputs from to the form
+    let customerId = obj.customer_id,
+        user_name = obj.user_name,
+        city = obj.city,
+        retailer = obj.retail,
+        part_num = obj.part_num,
+        description = obj.description,
         unit_price = obj.unit_price,
         quantity = obj.quantity,
-        retailer = obj.retail,
-        ship_method = obj.shipping_method,
-        customerId = obj.customer_id,
-        user_name = obj.user_name;
+        oversize_container = obj.oversize,
+        shipping_method = obj.shipping_method;
 
-    console.log(customerId, city, unit_price, quantity, retailer, ship_method);
+    console.log(customerId, city, unit_price, quantity, retailer, shipping_method);
 
     //query for inserting into the database
     const querystring =
-        "INSERT INTO customer_info(customer_id, user_name, city, retail) VALUES(?,?,?,?)";
-    //using the sql connection to apply the querystring and pass them to the variables
+        "INSERT INTO customer_info(customer_id, user_name, city, retail, part_number, description, unit_price, quantity, oversize_container, shipping_method) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    //using the sql connection to apply the querystring and passing them to the variable values
     connection.query(querystring, [
         customerId,
         user_name,
         city,
-        retailer
+        retailer,
+        part_num,
+        description,
+        unit_price,
+        quantity, oversize_container,
+        shipping_method
     ]);
-
+    //setting duration to submit form on clicking the submit button
     setTimeout(function () {
         res.redirect('/');
         res.end();
-    }, 5000);
+    }, 10000);
 });
-//notifying the console that the server will listen at port 3000
+//notifying the console that the server will listen at port 4000
 
 app.listen(4000);
 console.log('Server is listening from port 4000');
