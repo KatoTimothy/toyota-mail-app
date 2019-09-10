@@ -2,9 +2,11 @@
 window.onload = function () {
 	document.querySelector('#customer-id').focus();
 }
+//initially setting to 0
 var cost, total, quantity, salesTax = 0;
+//getting the form element
 var formEl = document.getElementById("toyota-mail");
-
+//on click call validData()
 formEl.onsubmit = validData;
 
 // validates form
@@ -24,7 +26,9 @@ function validData() {
 		//get quantity input element
 		quantityEl = document.querySelector("#qty"),
 		// get element that displays errors
-		errorMsgEl = document.getElementsByClassName("msg");
+		errorMsgEl = document.getElementsByClassName("msg"),
+		computationEl = document.getElementsByClassName("computations");
+
 
 	//give  all error message elements all empty html text
 	for (var i = 0; i < errorMsgEl.length; i++) {
@@ -115,7 +119,6 @@ var computeCost = function () {
 	costEl.innerHTML = ` $ ${cost.toFixed(2)}`;
 	// event.preventDefault();
 	return cost;
-
 } //compute cost	
 
 
@@ -233,10 +236,13 @@ function shippingHandling() {
 //computes total
 function computeTotal() {
 
-	total = (parseFloat(computeCost()) + parseFloat(computeSalesTax()) + parseFloat(shippingHandling())).toFixed(2);
-	//print value to browser
+	cost = computeCost(),
+		salesTax = computeSalesTax();
+	let shippingCost = shippingHandling();
 
-	document.getElementById('total').innerHTML = "$ " + total;
+	total = parseFloat(cost) + parseFloat(salesTax) + parseFloat(shippingCost);
+	//print total  to browser
+	document.getElementById('total').innerHTML = "$ " + total.toFixed(2);
 	// event.preventDefault();
 } //end compute total
 
@@ -253,11 +259,15 @@ function Exit() {
 }
 
 //resets the form
-function newOrder() {
-	let newOrderButton = document.getElementById('new-order');
-	newOrderButton.addEventListener("click", (Event) => {
-		document.getElementById('toyota-mail').reset();
-	});
-}
+let newOrderButton = document.getElementById('new-order');
+let computationEl = document.getElementsByClassName("computations");
+newOrderButton.addEventListener("click", (Event) => {
+	Event.preventDefault();
+	document.getElementById('toyota-mail').reset();
+	for (var i = 0; i < computationEl.length; i++) {
+		computationEl[i].innerHTML = "";
+	}
+	
+});
+
 Exit();
-newOrder();
