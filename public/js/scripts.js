@@ -83,7 +83,7 @@ function validData() {
 	if (!validPrice) {
 		unitPriceEl.style = "border-color:red";
 		unitPriceEl.focus();
-		document.querySelector("#price-msg").innerHTML = "quantity Can't be missing";
+		document.querySelector("#price-msg").innerHTML = "numbers only and unit price is required";
 		return false;
 	}
 
@@ -93,7 +93,7 @@ function validData() {
 	if (!validQty) {
 		quantityEl.style = "border-color:red";
 		quantityEl.focus();
-		document.querySelector("#price-msg").innerHTML = "price is required";
+		document.querySelector("#price-msg").innerHTML = "numbers only and quantity is required";
 		return false;
 	}
 
