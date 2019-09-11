@@ -242,7 +242,7 @@ function computeTotal() {
 	total = parseFloat(cost) + parseFloat(salesTax) + parseFloat(shippingCost);
 	//print total  to browser
 	document.getElementById('total').innerHTML = "$ " + total.toFixed(2);
-	
+
 } //end compute total
 
 
@@ -263,12 +263,15 @@ let newOrderButton = document.getElementById('new-order');
 let computationEl = document.getElementsByClassName("computations");
 //listen for a click on the new order button
 newOrderButton.addEventListener("click", (Event) => {
-	Event.preventDefault();
 	//resetting all input fields
 	document.getElementById('toyota-mail').reset();
 	//looping through all elements containing output and clearing the HTML content out of each of them
 	for (var i = 0; i < computationEl.length; i++) {
 		computationEl[i].innerHTML = "";
+	}
+	//reset all styles on the form inputs
+	for (var i = 0; i < formEl.elements.length; i++) {
+		formEl.elements[i].style = "";
 	}
 });
 
