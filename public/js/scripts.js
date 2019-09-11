@@ -186,10 +186,9 @@ function shippingHandling() {
 	//loop throught the shippingMethods array
 	for (var i = 0; i < shippingMethods.length; i++) {
 
-		//check the checked radio button about shipping methods
+		//get the checked radio button 
 		if (shippingMethods[i].checked) {
 
-			// event.preventDefault();
 			//get value of checked box
 			switch (shippingMethods[i].value) {
 
@@ -216,7 +215,7 @@ function shippingHandling() {
 				shipAndHandle = quantity * shipping;
 				shipAndHandleEl.innerHTML = `$ ${shipAndHandle.toFixed(2)}`;
 				//						console.log(shipAndHandle);
-				// event.preventDefault();
+
 				return shipAndHandle.toFixed(2);
 			} else {
 				//increment the shipping charge by 5
