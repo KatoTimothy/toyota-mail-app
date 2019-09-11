@@ -269,9 +269,10 @@ newOrderButton.addEventListener("click", (Event) => {
 	for (var i = 0; i < computationEl.length; i++) {
 		computationEl[i].innerHTML = "";
 	}
-	//reset all styles on the form inputs
-	for (var i = 0; i < formEl.elements.length; i++) {
-		formEl.elements[i].style = "";
+	//get all error spans
+
+	for (var i = 0; i < errorMsgEl.length; i++) {
+		errorMsgEl[i].style = "";
 	}
 });
 
