@@ -235,14 +235,14 @@ function shippingHandling() {
 //computes total
 function computeTotal() {
 
-	cost = computeCost(),
-		salesTax = computeSalesTax();
+	cost = computeCost();
+	salesTax = computeSalesTax();
 	let shippingCost = shippingHandling();
 
 	total = parseFloat(cost) + parseFloat(salesTax) + parseFloat(shippingCost);
 	//print total  to browser
 	document.getElementById('total').innerHTML = "$ " + total.toFixed(2);
-	// event.preventDefault();
+	
 } //end compute total
 
 
