@@ -260,14 +260,17 @@ function Exit() {
 
 //resets the form
 let newOrderButton = document.getElementById('new-order');
+//getting elements containing the computed results
 let computationEl = document.getElementsByClassName("computations");
+//listen for a click on the new order button
 newOrderButton.addEventListener("click", (Event) => {
 	Event.preventDefault();
+	//resetting all input fields
 	document.getElementById('toyota-mail').reset();
+	//looping through all elements containing output and clearing the HTML content out of each of them
 	for (var i = 0; i < computationEl.length; i++) {
 		computationEl[i].innerHTML = "";
 	}
-	
 });
 
 Exit();
