@@ -184,6 +184,11 @@ select:focus {
 	width: 100px;
 }
 
+.btn:hover {
+	background: gray;
+	color: white;
+}
+
 .computations {
 	background: white;
 	text-align: right;
