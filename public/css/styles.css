@@ -29,9 +29,6 @@ body {
 	width: 80%;
 }
 
-/*layout styles*/
-
-
 /*
 	GRID STYLES
 */
@@ -66,7 +63,6 @@ body {
 }
 
 #part-ordered {
-
 	grid-column: 1;
 	grid-row: 2;
 }
