@@ -2,14 +2,14 @@
 window.onload = function () {
 	document.querySelector('#customer-id').focus();
 }
-//initially setting to 0
-var cost, total, quantity, salesTax = 0;
+
 //getting the form element
 var formEl = document.getElementById("toyota-mail");
 //on click call validData()
 formEl.onsubmit = validData;
+var cost, total, quantity, salesTax = 0;
 
-// validates form
+// validates form and computes
 function validData() {
 	//get quantity
 	quantity = parseFloat(document.getElementById('qty').value);
@@ -34,7 +34,6 @@ function validData() {
 	for (var i = 0; i < errorMsgEl.length; i++) {
 		errorMsgEl[i].innerHTML = "";
 	}
-
 	//reset styles from all elements in the form 
 	for (var i = 0; i < formEl.elements.length; i++) {
 		formEl.elements[i].style = "";
@@ -100,10 +99,7 @@ function validData() {
 		document.querySelector("#price-msg").innerHTML = "numbers only and quantity is required";
 		return false;
 	}
-
-	computeCost();
-	computeSalesTax();
-	shippingHandling();
+	//call compute function
 	computeTotal();
 } //end validate
 
@@ -117,10 +113,8 @@ var computeCost = function () {
 	cost = unitPrice * quantity;
 	//display cost in browser
 	costEl.innerHTML = ` $ ${cost.toFixed(2)}`;
-	// event.preventDefault();
 	return cost;
 } //compute cost	
-
 
 //computes the sales tax based on town selected
 var computeSalesTax = function () {
@@ -130,53 +124,45 @@ var computeSalesTax = function () {
 	retailCustomer = document.getElementById('retail').checked;
 	//			console.log(retailCustomer);
 	if (!retailCustomer) {
-
 		salesTax = 0;
 		salesTaxEl.innerHTML = "$ " + salesTax.toFixed(2);
-		// event.preventDefault();
 		return salesTax;
 	} else {
 		//get towncodes
 		var selectedCity = document.getElementById('city').value;
 		console.log(selectedCity);
-		// event.preventDefault();
-		//get selected city
+		//test the selected city
 		switch (selectedCity) {
 			//if 'kampala is selected
 			case 'KLA': {
 				salesTax = (cost * 10 / 100).toFixed(2);
-				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return salesTax;
 				break;
 			}
-			// if entebbe or mbarara are selected
+			// if entebbe or mbarara is selected
 			case 'EBB':
 			case 'MBR': {
 				salesTax = (cost * 5 / 100).toFixed(2);
-				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return salesTax;
 				break;
 			}
 			case 'OTH':
 				salesTax = 0;
-				// event.preventDefault();
 				salesTaxEl.innerHTML = `$ ${salesTax}`;
-				return salesTax;
 		} // end switch		
+		//return the computed salesTax
+		return salesTax;
 	} //end else	
-} //end compute sales tax	
+} //end compute sales tax function	
 
 
 //computes shipping and handling fees
-
 function shippingHandling() {
-	//shipAndHandle fees
+	//stores ship and handling cost
 	var shipAndHandleEl = document.getElementById('ship-bill'),
+		//stores the shipping charge	
 		shipping,
-
-		//get shipping methods 
+		//getting the radio buttons name ship_method 
 		shippingMethods = document.getElementsByName('ship_method'),
 		//store the shipping and handling cost
 		shipAndHandle;
@@ -195,7 +181,7 @@ function shippingHandling() {
 				case 'ups': {
 					shipping = 7;
 					break;
-				} //case	
+				}
 
 				case 'fed_ex_ground': {
 					shipping = 9.25;
@@ -223,7 +209,6 @@ function shippingHandling() {
 				shipAndHandle = quantity * shipping;
 				shipAndHandleEl.innerHTML = `$ ${shipAndHandle.toFixed(2)}`;
 				//						console.log(shipAndHandle);
-				// event.preventDefault();
 				return shipAndHandle.toFixed(2);
 			} //else end 	
 		} //if end 	
@@ -231,18 +216,15 @@ function shippingHandling() {
 } // compute ship handling fees	
 
 
-
 //computes total
 function computeTotal() {
-
 	cost = computeCost();
 	salesTax = computeSalesTax();
 	let shippingCost = shippingHandling();
-
+	//calculate the total
 	total = parseFloat(cost) + parseFloat(salesTax) + parseFloat(shippingCost);
 	//print total  to browser
 	document.getElementById('total').innerHTML = "$ " + total.toFixed(2);
-
 } //end compute total
 
 
