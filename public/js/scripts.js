@@ -272,7 +272,7 @@ newOrderButton.addEventListener("click", (Event) => {
 	//get all error spans
 
 	for (var i = 0; i < errorMsgEl.length; i++) {
-		errorMsgEl[i].style = "";
+		errorMsgEl[i].innerHTML = "";
 	}
 });
 
