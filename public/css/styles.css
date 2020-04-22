@@ -113,7 +113,7 @@ input[type="number"],
 	height: 25px;
 }
 
-#unit-price,
+#item-price,
 #quantity {
 	text-align: right;
 }
@@ -140,7 +140,7 @@ legend {
 	font-weight: 550;
 }
 
-.city-retail {
+.town-retail {
 	display: inline-block;
 	width: 150px;
 	margin-left: 2em;
@@ -155,7 +155,7 @@ legend {
 	margin-left: 15px;
 }
 
-#unit-price {
+#item-price {
 	width: 100px;
 }
 
