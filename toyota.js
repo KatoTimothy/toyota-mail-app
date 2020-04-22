@@ -21,7 +21,8 @@ app.use(express.static(public));
 //database configurations
 const db = mysql.createConnection({
 	host: 'localhost',
-	user: 'root',
+	user: 'kato_tim',
+	password: 'timuci-1994',
 	database: 'toyota_db'
 });
 
@@ -43,7 +44,7 @@ app.post("/purchases", (req, res) => {
 
 	//sql query
 	const sql =
-		"INSERT INTO customer_info(id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) VALUES(?,?,?,?,?,?,?,?,?,?)";
+		"INSERT INTO customer_info(id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) VALUES(?,?,?,?,?,?,?,?,?)";
 
 	//query the database with posted values
 	db.query(sql, [customer_id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method
