@@ -1,7 +1,6 @@
 {
   "name": "toyota-mail-app",
   "version": "1.0.0",
-  "description": "Toyota mail app",
   "main": "index.js",
   "scripts": {
     "start": "node toyota",
