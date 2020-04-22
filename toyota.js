@@ -32,7 +32,7 @@ app.get("/", function (req, res) {
 });
 
 //for post request to '/purchases/, process the data 
-app.post("/purchases", (req, res) => {
+app.post("/orders", (req, res) => {
 
 	//obtain posted values from the request body
 	let {

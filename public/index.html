@@ -31,10 +31,10 @@
 					</div>
 
 					<div class="form-group">
-						<label for="town" class="form-label">town:</label>
+						<label for="customer-town" class="form-label">Town:</label>
 						<div class="form-inline">
 
-							<select id="town" class="form-control" name="town">
+							<select id="customer-town" class="form-control" name="town">
 								<option value="KLA" selected id="kampala">Kampala</option>
 								<option value="EBB" id="entebbe">Entebbe</option>
 								<option value="MBR" id="mbarara">Mbarara</option>
@@ -43,8 +43,8 @@
 
 
 							<input type="hidden" name="customer_type" class="mx" value="Wholesaler">
-							<input type="checkbox" name="customer_type" id="retail" checked class="mx" value="Retailer">
-							<label for="retail"><small>Retail Customer</small></label>
+							<input type="checkbox" name="customer_type" id="customer-type" checked class="mx" value="Retailer">
+							<label for="customer-type"><small>Retail Customer</small></label>
 
 						</div>
 					</div> <!-- form-group out-->
@@ -56,7 +56,7 @@
 					<legend>Shipping</legend>
 
 					<div class="form-group">
-						<input type="radio" name="ship_method" id="ups" value="US Postal Service" checked>&nbsp;
+						<input type="radio" name="shipping_method" id="ups" value="US Postal Service" checked>&nbsp;
 						<label for="ups" class="">UPS</label>
 
 
