@@ -16,13 +16,13 @@ function validData() {
 
 	//get customer id
 	const customerIdEl = document.querySelector('#customer-id'),
-		userNameEl = document.querySelector('#user-name'),
+		userNameEl = document.querySelector('#customer-name'),
 		//get user name
-		partNumberEl = document.querySelector('#part_num'),
-		//get description input element
-		descriptionEl = document.querySelector('#description'),
+		partNumberEl = document.querySelector('#item_code'),
+		//get item_name input element
+		item_nameEl = document.querySelector('#item_name'),
 		//get unit price input element
-		unitPriceEl = document.querySelector("#unit-price"),
+		unitPriceEl = document.querySelector("#item-price"),
 		//get quantity input element
 		quantityEl = document.querySelector("#qty"),
 		// get element that displays errors
@@ -71,11 +71,11 @@ function validData() {
 		return false;
 	}
 
-	//validate description input
-	let validDescribe = descriptionEl.value !== "";
+	//validate item_name input
+	let validDescribe = item_nameEl.value !== "";
 	if (!validDescribe) {
-		descriptionEl.style = "border-color:red";
-		descriptionEl.focus();
+		item_nameEl.style = "border-color:red";
+		item_nameEl.focus();
 		document.querySelector("#describe-msg").innerHTML = "Required field";
 		return false;
 	}
@@ -106,7 +106,7 @@ function validData() {
 //computes the cost and displays it in browser
 var computeCost = function () {
 	//get unit price
-	var unitPrice = document.getElementById("unit-price").value,
+	var unitPrice = document.getElementById("item-price").value,
 		//get cost element
 		costEl = document.getElementById('cost');
 	//compute cost	
@@ -129,10 +129,10 @@ var computeSalesTax = function () {
 		return salesTax;
 	} else {
 		//get towncodes
-		var selectedCity = document.getElementById('city').value;
-		console.log(selectedCity);
-		//test the selected city
-		switch (selectedCity) {
+		var selectedtown = document.getElementById('town').value;
+		console.log(selectedtown);
+		//test the selected town
+		switch (selectedtown) {
 			//if 'kampala is selected
 			case 'KLA': {
 				salesTax = (cost * 10 / 100).toFixed(2);
@@ -244,7 +244,7 @@ let newOrderButton = document.getElementById('new-order');
 //getting elements containing the computed results
 let computationEl = document.getElementsByClassName("computations");
 //listen for a click on the new order button
-newOrderButton.addEventListener("click", (Event) => {
+newOrderButton.addEventListener("click", (event) => {
 	//resetting all input fields
 	document.getElementById('toyota-mail').reset();
 	//looping through all elements containing output and clearing the HTML content out of each of them
