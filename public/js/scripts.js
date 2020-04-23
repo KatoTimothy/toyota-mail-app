@@ -7,7 +7,12 @@ window.onload = function () {
 var formEl = document.getElementById("toyota-mail")
 //on click call validData()
 formEl.addEventListener("submit", (event) => {
-  validData()
+  //prevent default and first validate form
+  // event.preventDefault()
+  if (validData()) {
+    //call compute function
+    computeTotal()
+  }
 })
 var cost,
   total,
@@ -109,8 +114,8 @@ function validData() {
       "numbers only and quantity is required"
     return false
   }
-  //call compute function
-  computeTotal()
+  return true
+
 } //end validate
 
 //computes the cost and displays it in browser
