@@ -12,7 +12,7 @@
   <body>
     <div class="container clearfix">
       <h2 style="text-align: center;">TOYOTA MAIL ORDER APP</h2>
-      <form action="orders" method="post" id="toyota-mail">
+      <form action="/orders" method="post" id="toyota-mail">
         <div class="form-container">
           <!--customer Information-->
           <fieldset id="customer-info" class="form-group">
@@ -43,19 +43,18 @@
             <div class="form-group">
               <label for="customer-town" class="form-label">Town:</label>
               <div class="form-inline">
-                <select id="customer-town" class="form-control" name="town">
+                <select
+                  id="customer-town"
+                  class="form-control"
+                  name="customer_town"
+                >
                   <option value="Kampala" selected id="kampala">Kampala</option>
                   <option value="Entebbe" id="entebbe">Entebbe</option>
                   <option value="Mbarara" id="mbarara">Mbarara</option>
                   <option value="Other" id="other">Other</option>
                 </select>
 
-                <input
-                  type="hidden"
-                  name="customer_type"
-                  class="mx"
-                  value="Wholesaler"
-                />
+                <input type="hidden" name="customer_type" value="Wholesaler" />
                 <input
                   type="checkbox"
                   name="customer_type"
@@ -171,9 +170,8 @@
               <div class="form-inline" style="font-size: 0.9em;">
                 <input
                   type="hidden"
-                  name="container"
+                  name="container_oversize"
                   id="container-oversize"
-                  checked
                   value="Yes"
                 />
                 <input
@@ -182,7 +180,7 @@
                   id="container-oversize"
                   value="No"
                 />
-                <label for="oversize">Oversize Container?</label>
+                <label for="container-oversize">Oversize Container?</label>
               </div>
             </div>
           </fieldset>
