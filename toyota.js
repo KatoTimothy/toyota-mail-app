@@ -60,7 +60,6 @@ app.post("/orders", (req, res) => {
 
   //sql query
   let sql = `INSERT INTO orders (customer_id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) `
-
   sql += `VALUES(?,?,?,?,?,?,?,?,?)`
 
   //query the database with posted values
@@ -75,15 +74,15 @@ app.post("/orders", (req, res) => {
     container_oversize,
     shipping_method,
   ])
-  // //redirect to index page after 10 seconds
+  // //redirect to index page after 1seconds
   setTimeout(function () {
     res.redirect("/")
     res.end()
-  }, 1000)
+  }, 5000)
 })
 
-//server listening on port 4000
+//server listening on port 3000
 app.listen(3000)
 
 //just for debugging
-console.log("Server is listening from port 4000")
+console.log("Server is listening from port 3000")
