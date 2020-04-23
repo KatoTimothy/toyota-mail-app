@@ -7,7 +7,9 @@ window.onload = function () {
 var formEl = document.getElementById("toyota-mail")
 //on click call validData()
 formEl.addEventListener("submit", (event) => {
-  event.preventDefault()
+
+  //prevent default and first validate form
+  // event.preventDefault()
   if (validData()) {
     //call compute function
     computeTotal()
