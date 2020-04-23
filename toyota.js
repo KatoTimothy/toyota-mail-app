@@ -1,24 +1,24 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mysql = require("mysql");
-const morgan = require("morgan");
+const express = require("express")
+const bodyParser = require("body-parser")
+const mysql = require("mysql")
+const morgan = require("morgan")
 
-const app = express();
+const app = express()
 
-var public = "./public/";
+var public = "./public/"
 
 //middleware to show brief server information
-app.use(morgan("short"));
+app.use(morgan("short"))
 
 //middleware to parse data
 app.use(
   bodyParser.urlencoded({
     extended: false,
-  })
-);
+  }),
+)
 
 //serve the static files in the public folder
-app.use(express.static(public));
+app.use(express.static(public))
 
 //database configurations
 const db = mysql.createConnection({
@@ -26,12 +26,12 @@ const db = mysql.createConnection({
   user: "kato_tim",
   password: "timuci-1994",
   database: "toyota_db",
-});
+})
 
 //home route serve the index page
 app.get("/", function (req, res) {
-  res.sendfile(public + "index.html");
-});
+  res.sendfile(public + "index.html")
+})
 
 //for post request to '/orders/, process the data
 app.post("/orders", (req, res) => {
@@ -46,7 +46,7 @@ app.post("/orders", (req, res) => {
     quantity,
     shipping_method,
     container_oversize,
-  } = req.body;
+  } = req.body
 
   //Just a little console log for debugging
   console.log(
@@ -55,13 +55,13 @@ app.post("/orders", (req, res) => {
     quantity,
     customer_type,
     shipping_method,
-    container_oversize
-  );
+    container_oversize,
+  )
 
   //sql query
-  let sql = `INSERT INTO orders (customer_id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) `;
+  let sql = `INSERT INTO orders (customer_id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) `
 
-  sql += `VALUES(?,?,?,?,?,?,?,?,?)`;
+  sql += `VALUES(?,?,?,?,?,?,?,?,?)`
 
   //query the database with posted values
   db.query(sql, [
@@ -74,16 +74,16 @@ app.post("/orders", (req, res) => {
     quantity,
     container_oversize,
     shipping_method,
-  ]);
+  ])
   // //redirect to index page after 10 seconds
   setTimeout(function () {
-    res.redirect("/");
-    res.end();
-  }, 60000);
-});
+    res.redirect("/")
+    res.end()
+  }, 1000)
+})
 
 //server listening on port 4000
-app.listen(4000);
+app.listen(3000)
 
 //just for debugging
-console.log("Server is listening from port 4000");
+console.log("Server is listening from port 4000")

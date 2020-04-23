@@ -54,13 +54,14 @@
                   <option value="Other" id="other">Other</option>
                 </select>
 
-                <input type="hidden" name="customer_type" value="Wholesaler" />
+                <!-- <input type="hidden" name="customer_type" value="Wholesaler" /> -->
+
                 <input
                   type="checkbox"
                   name="customer_type"
                   id="customer-type"
-                  checked
                   class="mx"
+                  checked
                   value="Retailer"
                 />
                 <label for="customer-type"
@@ -117,11 +118,11 @@
           <fieldset class="form-group" id="part-ordered">
             <legend>Part Ordered</legend>
             <div class="form-group">
-              <label for="item_code" class="form-label">Part Number:</label>
+              <label for="item-code" class="form-label">Part Number:</label>
               <input
                 type="text"
                 name="item_code"
-                id="item_code"
+                id="item-code"
                 class="form-control"
               />
               <div id="part-msg" class="msg"><small></small></div>
@@ -168,12 +169,6 @@
             <div class="form-group">
               <label for="container-oversize" class="form-label"></label>
               <div class="form-inline" style="font-size: 0.9em;">
-                <input
-                  type="hidden"
-                  name="container_oversize"
-                  id="container-oversize"
-                  value="Yes"
-                />
                 <input
                   type="checkbox"
                   name="container_oversize"
