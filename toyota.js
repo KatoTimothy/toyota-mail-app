@@ -74,7 +74,7 @@ app.post("/orders", (req, res) => {
     container_oversize,
     shipping_method,
   ])
-  // //redirect to index page after 1seconds
+  // //redirect to index page after 5 seconds
   setTimeout(function () {
     res.redirect("/")
     res.end()
