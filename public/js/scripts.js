@@ -8,27 +8,26 @@ var formEl = document.getElementById("toyota-mail")
 //on click call validData()
 formEl.addEventListener("submit", (event) => {
 
-  //prevent default and first validate form
-  // event.preventDefault()
-  if (validData()) {
-    //call compute function
+  //
+  if (!validate()) {
+    event.preventDefault()
+  } else {
     computeTotal()
   }
 })
+
 var cost,
   total,
   quantity,
   salesTax = 0
 
 // validates form and computes
-function validData() {
+function validate() {
   //get quantity
   quantity = parseFloat(document.getElementById("qty").value)
 
-  //get customer id
   const customerIdEl = document.querySelector("#customer-id"),
     userNameEl = document.querySelector("#customer-name"),
-    //get user name
     partNumberEl = document.querySelector("#item-code"),
     //get item_name input element
     item_nameEl = document.querySelector("#item-name"),
