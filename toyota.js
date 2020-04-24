@@ -30,7 +30,19 @@ const db = mysql.createConnection({
 
 //home route serve the index page
 app.get("/", function (req, res) {
-  res.sendfile(public + "index.html")
+  try {
+    res.sendfile(public + "index.html")
+  } catch{
+    res.set({ 'Content-Type': 'text/html' }).send(`<h2 style="color:red">Bad request</h2>`).end()
+  }
+})
+
+app.get("/orders", function (req, res) {
+  try {
+    res.status(404).set({ 'Content-Type': 'text/html' }).send(`<h2 style="color:red">Bad request</h2>`).end()
+  } catch{
+
+  }
 })
 
 //for post request to '/orders/, process the data
@@ -47,7 +59,6 @@ app.post("/orders", (req, res) => {
     shipping_method,
     container_oversize,
   } = req.body
-
   //Just a little console log for debugging
   console.log(
     customer_id,
@@ -74,11 +85,18 @@ app.post("/orders", (req, res) => {
     container_oversize,
     shipping_method,
   ])
-  // //redirect to index page after 5 seconds
-  setTimeout(function () {
-    res.redirect("/")
-    res.end()
-  }, 5000)
+
+  //send a success page 
+  try {
+    let msg = `<h2 style="color:green">Form submitted successfully</h2>`
+    //set header
+    res.set({
+      "Content-Type": "text/html"
+    }).send(msg).end()
+  } catch{
+    let error_msg = `<h2 Oops!</h2`
+    res.set({ 'Content-Type': 'text/html' }).status(400).send(error_msg).end()
+  }
 })
 
 //server listening on port 3000
