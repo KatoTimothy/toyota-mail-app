@@ -1,5 +1,4 @@
 DROP DATABASE IF EXISTS `toyota_db`;
-
 CREATE DATABASE `toyota_db`;
 
 USE `toyota_db`;
