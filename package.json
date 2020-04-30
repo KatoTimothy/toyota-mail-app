@@ -1,7 +1,7 @@
 {
   "name": "toyota-mail-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "toyota.js",
   "scripts": {
     "start": "node toyota",
     "test": "echo \"Error: no test specified\" && exit 1"
