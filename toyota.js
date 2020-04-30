@@ -47,56 +47,25 @@ app.get("/orders", function (req, res) {
 
 //for post request to '/orders/, process the data
 app.post("/orders", (req, res) => {
+
   //obtain posted values from the request body
-  let {
-    customer_id,
-    customer_name,
-    customer_type,
-    customer_town,
-    item_code,
-    item_name,
-    quantity,
-    shipping_method,
-    container_oversize,
-  } = req.body
-  //Just a little console log for debugging
-  console.log(
-    customer_id,
-    customer_town,
-    quantity,
-    customer_type,
-    shipping_method,
-    container_oversize,
-  )
+  const form_data = { ...req.body }
+  console.log(form_data.customer_id)
 
   //sql query
-  let sql = `INSERT INTO orders (customer_id, customer_name, customer_town, customer_type, item_code, item_name, quantity, container_oversize, shipping_method) `
-  sql += `VALUES(?,?,?,?,?,?,?,?,?)`
+  let sql = `INSERT INTO orders SET ? `
 
-  //query the database with posted values
-  db.query(sql, [
-    customer_id,
-    customer_name,
-    customer_town,
-    customer_type,
-    item_code,
-    item_name,
-    quantity,
-    container_oversize,
-    shipping_method,
-  ])
+  //Insert into database
+  db.query(sql, form_data, (errors, results, fields) => {
 
-  //send a success page 
-  try {
-    let msg = `<h2 style="color:green">Form submitted successfully</h2>`
-    //set header
-    res.set({
-      "Content-Type": "text/html"
-    }).send(msg).end()
-  } catch{
-    let error_msg = `<h2 Oops!</h2`
-    res.set({ 'Content-Type': 'text/html' }).status(400).send(error_msg).end()
-  }
+    if (errors) {
+      throw errors;
+    }
+    console.log(results.insertId)
+  })
+  let msg = `<h2 style="color:green">Form submitted successfully</h2>`
+  res.send(msg)
+
 })
 
 //server listening on port 3000
