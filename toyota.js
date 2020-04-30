@@ -20,21 +20,19 @@ app.use(
 //serve the static files in the public folder
 app.use(express.static(public))
 
-//database configurations
-const db = mysql.createConnection({
+//Establish connection
+const db_connection = mysql.createConnection({
   host: "localhost",
   user: "kato_tim",
   password: "timuci-1994",
   database: "toyota_db",
 })
-
-//home route serve the index page
-app.get("/", function (req, res) {
-  try {
-    res.sendfile(public + "index.html")
-  } catch{
-    res.set({ 'Content-Type': 'text/html' }).send(`<h2 style="color:red">Bad request</h2>`).end()
+db_connection.connect((errors) => {
+  if (errors) {
+    console.log("Error connecting " + errors.stack)
+    return;
   }
+  console.log(`Connection established`)
 })
 //handle all requests for /orders
 app.route('/orders')
@@ -56,7 +54,7 @@ app.route('/orders')
     let sql = `INSERT INTO orders SET ? `
 
     //Insert into database
-    db.query(sql, form_data, (errors, results, fields) => {
+    db_connection.query(sql, form_data, (errors, results, fields) => {
 
       if (errors) {
         throw errors;
