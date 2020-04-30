@@ -36,37 +36,37 @@ app.get("/", function (req, res) {
     res.set({ 'Content-Type': 'text/html' }).send(`<h2 style="color:red">Bad request</h2>`).end()
   }
 })
+//handle all requests for /orders
+app.route('/orders')
+  .get((req, res) => {
+    try {
+      res.status(404)
+        .send(`<h2 style="color:red">Bad request</h2>`)
+    } catch{
 
-app.get("/orders", function (req, res) {
-  try {
-    res.status(404).set({ 'Content-Type': 'text/html' }).send(`<h2 style="color:red">Bad request</h2>`).end()
-  } catch{
-
-  }
-})
-
-//for post request to '/orders/, process the data
-app.post("/orders", (req, res) => {
-
-  //obtain posted values from the request body
-  const form_data = { ...req.body }
-  console.log(form_data.customer_id)
-
-  //sql query
-  let sql = `INSERT INTO orders SET ? `
-
-  //Insert into database
-  db.query(sql, form_data, (errors, results, fields) => {
-
-    if (errors) {
-      throw errors;
     }
-    console.log(results.insertId)
   })
-  let msg = `<h2 style="color:green">Form submitted successfully</h2>`
-  res.send(msg)
+  .post((req, res) => {
 
-})
+    //obtain posted values from the request body
+    const form_data = { ...req.body }
+    console.log(form_data.customer_id)
+
+    //sql query
+    let sql = `INSERT INTO orders SET ? `
+
+    //Insert into database
+    db.query(sql, form_data, (errors, results, fields) => {
+
+      if (errors) {
+        throw errors;
+      }
+      console.log(results.insertId)
+    })
+    let msg = `<h2 style="color:green">Form submitted successfully</h2>`
+    res.send(msg)
+
+  })
 
 //server listening on port 3000
 app.listen(3000)
