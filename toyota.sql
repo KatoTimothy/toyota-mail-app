@@ -12,6 +12,7 @@ CREATE TABLE `orders`
 `customer_type` varchar(25) DEFAULT NULL,
 `item_name` varchar(100) DEFAULT NULL, 
 `item_code` int(100) DEFAULT NULL, 
+`item_price` int(100) DEFAULT NULL,
 `quantity` int(10) DEFAULT NULL,
 `container_oversize` varchar(10) DEFAULT NULL,
 `shipping_method` varchar(10) DEFAULT NULL
